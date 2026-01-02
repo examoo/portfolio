@@ -1,22 +1,27 @@
-// Three.js Scene Setup
-let scene, camera, renderer, particles, particleGeometry, particleMaterial;
-let torus, sphere, cube;
+// ==================== THREE.JS SCENE SETUP ====================
+let scene, camera, renderer;
 let mouseX = 0, mouseY = 0;
-let targetX = 0, targetY = 0;
 
 // Galaxy 3D Background System with Black Hole
-let galaxy, galaxyCore, nebulaCloud, starField, cosmicDust;
+let galaxyCore, nebulaCloud, starField, cosmicDust;
 let blackHole, accretionDisk, eventHorizon;
-let galaxyStars = [];
 let spiralArms = [];
 let scrollProgress = 0;
+let floatingShapes = [];
 
-// Initialize Three.js with Galaxy Design
+// Post-processing variables
+let composer, bloomPass;
+
+// Frame timing for smooth animations
+let frameCount = 0;
+let lastTime = 0;
+
+// ==================== INITIALIZE THREE.JS ====================
 function initThree() {
     // Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000510); // Deep space blue-black
-    scene.fog = new THREE.FogExp2(0x000510, 0.002);
+    scene.background = new THREE.Color(0x030014);
+    scene.fog = new THREE.FogExp2(0x030014, 0.0015);
 
     // Camera - positioned for galaxy view
     camera = new THREE.PerspectiveCamera(
@@ -33,31 +38,34 @@ function initThree() {
     renderer = new THREE.WebGLRenderer({
         canvas: canvas,
         alpha: true,
-        antialias: true
+        antialias: true,
+        powerPreference: 'high-performance'
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
 
     // Galaxy Lighting
-    const ambientLight = new THREE.AmbientLight(0x404060, 0.4);
+    const ambientLight = new THREE.AmbientLight(0x404060, 0.5);
     scene.add(ambientLight);
 
     // Galactic core light
-    const coreLight = new THREE.PointLight(0xffffff, 2, 150);
+    const coreLight = new THREE.PointLight(0xffffff, 2.5, 150);
     coreLight.position.set(0, 0, 0);
     scene.add(coreLight);
 
     // Colored accent lights for nebula effect
-    const nebulaPurple = new THREE.PointLight(0x9d4edd, 1.5, 100);
+    const nebulaPurple = new THREE.PointLight(0x9d4edd, 2, 100);
     nebulaPurple.position.set(30, 10, -20);
     scene.add(nebulaPurple);
 
-    const nebulaCyan = new THREE.PointLight(0x00d9ff, 1.5, 100);
+    const nebulaCyan = new THREE.PointLight(0x00d9ff, 2, 100);
     nebulaCyan.position.set(-30, -10, -20);
     scene.add(nebulaCyan);
 
     // Orange accretion disk glow
-    const accretionGlow = new THREE.PointLight(0xff6600, 3, 50);
+    const accretionGlow = new THREE.PointLight(0xff6600, 4, 50);
     accretionGlow.position.set(0, 0, 0);
     scene.add(accretionGlow);
 
@@ -68,15 +76,16 @@ function initThree() {
     createNebulaCloud();
     createStarField();
     createCosmicDust();
+    createFloatingShapes();
 
     // Animation Loop
     animate();
 }
 
-// Create Black Hole at Galaxy Center (Ultra-Smooth Cinematic Version)
+// ==================== BLACK HOLE CREATION ====================
 function createBlackHole() {
     // Event Horizon (perfectly smooth black sphere)
-    const horizonGeometry = new THREE.SphereGeometry(2.5, 128, 128); // Higher resolution
+    const horizonGeometry = new THREE.SphereGeometry(2.5, 128, 128);
     const horizonMaterial = new THREE.MeshBasicMaterial({
         color: 0x000000,
         transparent: false,
@@ -152,11 +161,10 @@ function createBlackHole() {
     const velocities = [];
 
     for (let i = 0; i < particleCount; i++) {
-        const t = Math.pow(i / particleCount, 0.7); // Non-linear for more density near center
+        const t = Math.pow(i / particleCount, 0.7);
         const angle = t * Math.PI * 16;
         const radius = 5 + t * 7;
 
-        // Add some natural randomness
         const radiusVar = (Math.random() - 0.5) * 1.5;
         const finalRadius = radius + radiusVar;
 
@@ -165,37 +173,22 @@ function createBlackHole() {
         const y = (Math.random() - 0.5) * 0.6 * Math.pow(1 - t, 2);
 
         positions.push(x, y, z);
-        velocities.push(angle); // Store initial angle for smooth rotation
+        velocities.push(angle);
 
         // Smooth color gradient with temperature physics
         const heat = Math.pow(1 - (finalRadius - 5) / 7, 1.5);
         let r, g, b;
 
         if (heat > 0.8) {
-            // White-hot core (> 10,000 K)
-            r = 1;
-            g = 1;
-            b = 1;
+            r = 1; g = 1; b = 1;
         } else if (heat > 0.6) {
-            // Blue-white (8,000-10,000 K)
-            r = 0.9 + heat * 0.1;
-            g = 0.95 + heat * 0.05;
-            b = 1;
+            r = 0.9 + heat * 0.1; g = 0.95 + heat * 0.05; b = 1;
         } else if (heat > 0.4) {
-            // Yellow-white (6,000-8,000 K)
-            r = 1;
-            g = 0.9 + heat * 0.1;
-            b = 0.6 + heat * 0.3;
+            r = 1; g = 0.9 + heat * 0.1; b = 0.6 + heat * 0.3;
         } else if (heat > 0.2) {
-            // Orange (4,000-6,000 K)
-            r = 1;
-            g = 0.5 + heat * 0.5;
-            b = 0.2 + heat * 0.4;
+            r = 1; g = 0.5 + heat * 0.5; b = 0.2 + heat * 0.4;
         } else {
-            // Red-orange (< 4,000 K)
-            r = 1;
-            g = 0.3 + heat * 0.3;
-            b = 0.1 + heat * 0.2;
+            r = 1; g = 0.3 + heat * 0.3; b = 0.1 + heat * 0.2;
         }
 
         colors.push(r, g, b);
@@ -254,7 +247,7 @@ function createBlackHoleJets() {
 
     for (let i = 0; i < jetParticles; i++) {
         const t = i / jetParticles;
-        const smoothT = t * t * (3 - 2 * t); // Smoothstep
+        const smoothT = t * t * (3 - 2 * t);
         const y = 6 + smoothT * 50;
         const spread = smoothT * 3;
 
@@ -266,7 +259,6 @@ function createBlackHoleJets() {
         positions.push(x, y, z);
         positions.push(x, -y, z);
 
-        // Smooth blue-white gradient
         const brightness = Math.pow(1 - smoothT, 1.5);
         const r = 0.7 + brightness * 0.3;
         const g = 0.85 + brightness * 0.15;
@@ -297,10 +289,8 @@ function createBlackHoleJets() {
     eventHorizon.add(jets);
 }
 
-
-// Create Glowing Galaxy Core
+// ==================== GALAXY CORE ====================
 function createGalaxyCore() {
-    // Bright core sphere
     const coreGeometry = new THREE.SphereGeometry(3, 32, 32);
     const coreMaterial = new THREE.MeshBasicMaterial({
         color: 0xffffff,
@@ -333,9 +323,9 @@ function createGalaxyCore() {
     galaxyCore.add(glow2);
 }
 
-// Create Spiral Galaxy with Star Clusters
+// ==================== SPIRAL GALAXY ====================
 function createSpiralGalaxy() {
-    const armCount = 3; // 3 spiral arms
+    const armCount = 3;
     const starsPerArm = 2000;
     const armTightness = 0.3;
     const armWidth = 0.5;
@@ -347,30 +337,24 @@ function createSpiralGalaxy() {
         const sizes = [];
 
         for (let i = 0; i < starsPerArm; i++) {
-            // Logarithmic spiral formula
             const t = (i / starsPerArm) * Math.PI * 4;
             const radius = 5 + t * 8;
             const angle = t * armTightness + (arm * (Math.PI * 2 / armCount));
 
-            // Position with some randomness
             const x = Math.cos(angle) * radius + (Math.random() - 0.5) * radius * armWidth;
             const z = Math.sin(angle) * radius + (Math.random() - 0.5) * radius * armWidth;
             const y = (Math.random() - 0.5) * 5 + Math.sin(t) * 2;
 
             positions.push(x, y, z);
 
-            // Star colors - from white to blue to purple
             const colorMix = Math.random();
             let r, g, b;
 
             if (colorMix < 0.3) {
-                // White/yellow stars
                 r = 1; g = 0.95 + Math.random() * 0.05; b = 0.8 + Math.random() * 0.2;
             } else if (colorMix < 0.6) {
-                // Blue stars
                 r = 0.6 + Math.random() * 0.2; g = 0.7 + Math.random() * 0.2; b = 1;
             } else {
-                // Purple/pink stars
                 r = 0.8 + Math.random() * 0.2; g = 0.4 + Math.random() * 0.2; b = 1;
             }
 
@@ -397,7 +381,7 @@ function createSpiralGalaxy() {
     }
 }
 
-// Create Colorful Nebula Cloud
+// ==================== NEBULA CLOUD ====================
 function createNebulaCloud() {
     const particleCount = 3000;
     const geometry = new THREE.BufferGeometry();
@@ -406,7 +390,6 @@ function createNebulaCloud() {
     const sizes = [];
 
     for (let i = 0; i < particleCount; i++) {
-        // Cluster around galaxy center with some spread
         const radius = Math.random() * 60 + 10;
         const theta = Math.random() * Math.PI * 2;
         const phi = (Math.random() - 0.5) * Math.PI * 0.3;
@@ -417,25 +400,15 @@ function createNebulaCloud() {
 
         positions.push(x, y, z);
 
-        // Nebula colors - purple, cyan, pink
         const colorChoice = Math.random();
         let r, g, b;
 
         if (colorChoice < 0.33) {
-            // Purple
-            r = 0.6 + Math.random() * 0.3;
-            g = 0.2 + Math.random() * 0.3;
-            b = 0.9 + Math.random() * 0.1;
+            r = 0.6 + Math.random() * 0.3; g = 0.2 + Math.random() * 0.3; b = 0.9 + Math.random() * 0.1;
         } else if (colorChoice < 0.66) {
-            // Cyan
-            r = 0.0 + Math.random() * 0.3;
-            g = 0.7 + Math.random() * 0.3;
-            b = 0.9 + Math.random() * 0.1;
+            r = 0.0 + Math.random() * 0.3; g = 0.7 + Math.random() * 0.3; b = 0.9 + Math.random() * 0.1;
         } else {
-            // Pink
-            r = 0.9 + Math.random() * 0.1;
-            g = 0.2 + Math.random() * 0.3;
-            b = 0.6 + Math.random() * 0.3;
+            r = 0.9 + Math.random() * 0.1; g = 0.2 + Math.random() * 0.3; b = 0.6 + Math.random() * 0.3;
         }
 
         colors.push(r, g, b);
@@ -459,7 +432,7 @@ function createNebulaCloud() {
     scene.add(nebulaCloud);
 }
 
-// Create Background Star Field
+// ==================== STAR FIELD ====================
 function createStarField() {
     const starCount = 5000;
     const geometry = new THREE.BufferGeometry();
@@ -467,7 +440,6 @@ function createStarField() {
     const colors = [];
 
     for (let i = 0; i < starCount; i++) {
-        // Random positions in a large sphere
         const radius = 100 + Math.random() * 400;
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos((Math.random() * 2) - 1);
@@ -478,15 +450,12 @@ function createStarField() {
 
         positions.push(x, y, z);
 
-        // Mostly white/blue stars
         const brightness = 0.7 + Math.random() * 0.3;
         const colorTint = Math.random();
 
         if (colorTint < 0.8) {
-            // White stars
             colors.push(brightness, brightness, brightness);
         } else {
-            // Blue tint
             colors.push(brightness * 0.8, brightness * 0.9, brightness);
         }
     }
@@ -505,7 +474,7 @@ function createStarField() {
     scene.add(starField);
 }
 
-// Create Cosmic Dust Particles
+// ==================== COSMIC DUST ====================
 function createCosmicDust() {
     const dustCount = 1500;
     const geometry = new THREE.BufferGeometry();
@@ -513,14 +482,12 @@ function createCosmicDust() {
     const colors = [];
 
     for (let i = 0; i < dustCount; i++) {
-        // Spread around galaxy plane
         const x = (Math.random() - 0.5) * 200;
         const y = (Math.random() - 0.5) * 30;
         const z = (Math.random() - 0.5) * 200;
 
         positions.push(x, y, z);
 
-        // Dark reddish brown dust
         const brightness = 0.1 + Math.random() * 0.2;
         colors.push(brightness * 1.2, brightness * 0.6, brightness * 0.4);
     }
@@ -540,10 +507,55 @@ function createCosmicDust() {
     scene.add(cosmicDust);
 }
 
-// Galaxy Animation Loop
-let frameCount = 0;
+// ==================== FLOATING GEOMETRIC SHAPES ====================
+function createFloatingShapes() {
+    const shapeTypes = [
+        { geometry: new THREE.IcosahedronGeometry(2, 0), color: 0x9d4edd },
+        { geometry: new THREE.OctahedronGeometry(1.5, 0), color: 0x00d9ff },
+        { geometry: new THREE.TetrahedronGeometry(1.8, 0), color: 0xec4899 },
+        { geometry: new THREE.DodecahedronGeometry(1.2, 0), color: 0x10b981 }
+    ];
 
-function animate() {
+    for (let i = 0; i < 8; i++) {
+        const shapeType = shapeTypes[i % shapeTypes.length];
+        const geometry = shapeType.geometry.clone();
+
+        // Wireframe material for holographic look
+        const material = new THREE.MeshBasicMaterial({
+            color: shapeType.color,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.6
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+
+        // Random position around the scene
+        const angle = (i / 8) * Math.PI * 2;
+        const radius = 30 + Math.random() * 20;
+        mesh.position.x = Math.cos(angle) * radius;
+        mesh.position.y = (Math.random() - 0.5) * 40;
+        mesh.position.z = Math.sin(angle) * radius;
+
+        // Store original position for floating animation
+        mesh.userData = {
+            originalY: mesh.position.y,
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.5 + Math.random() * 0.5,
+            rotationSpeed: {
+                x: (Math.random() - 0.5) * 0.02,
+                y: (Math.random() - 0.5) * 0.02,
+                z: (Math.random() - 0.5) * 0.02
+            }
+        };
+
+        floatingShapes.push(mesh);
+        scene.add(mesh);
+    }
+}
+
+// ==================== ANIMATION LOOP ====================
+function animate(currentTime) {
     requestAnimationFrame(animate);
     frameCount++;
 
@@ -551,27 +563,22 @@ function animate() {
 
     // Animate Black Hole and Accretion Disk
     if (eventHorizon) {
-        // Subtle rotation of event horizon
         eventHorizon.rotation.y += 0.0005;
-
-        // Pulse based on scroll proximity (gets more intense as you zoom in)
         const intensityPulse = 1 + Math.sin(time * 3) * (0.05 + scrollProgress * 0.1);
         eventHorizon.scale.set(intensityPulse, intensityPulse, intensityPulse);
     }
 
     if (accretionDisk) {
-        // Smooth disk rotation with easing
         const rotationSpeed = 0.004 + (scrollProgress * 0.006);
         accretionDisk.rotation.z += rotationSpeed;
 
-        // Rotate inner layers at different speeds for depth
         accretionDisk.children.forEach((child, index) => {
             if (child.rotation) {
                 child.rotation.z += (0.001 * (index + 1));
             }
         });
 
-        // Animate main particle system (last child after disk layers and photon rings)
+        // Animate main particle system
         const diskParticles = accretionDisk.children.find(child => child.type === 'Points' && child.geometry.attributes.velocity);
         if (diskParticles && diskParticles.geometry) {
             const positions = diskParticles.geometry.attributes.position.array;
@@ -583,54 +590,36 @@ function animate() {
                 const z = positions[i + 2];
                 const radius = Math.sqrt(x * x + z * z);
 
-                // Smooth spiral motion with physics-based velocity
-                const orbitalSpeed = 0.018 / Math.sqrt(radius); // Kepler's law approximation
+                const orbitalSpeed = 0.018 / Math.sqrt(radius);
                 const angle = Math.atan2(z, x) + orbitalSpeed;
 
-                // Gradual inward spiral
                 const inwardSpeed = 0.004 + scrollProgress * 0.003;
                 const newRadius = radius - inwardSpeed;
 
                 if (newRadius < 5) {
-                    // Smoothly reset to outer edge
                     const resetAngle = Math.random() * Math.PI * 2;
                     positions[i] = Math.cos(resetAngle) * 12;
                     positions[i + 1] = (Math.random() - 0.5) * 0.3;
                     positions[i + 2] = Math.sin(resetAngle) * 12;
                 } else {
-                    // Update position
                     positions[i] = Math.cos(angle) * newRadius;
                     positions[i + 2] = Math.sin(angle) * newRadius;
-
-                    // Smooth vertical oscillation
                     positions[i + 1] += Math.sin(frameCount * 0.01 + i) * 0.002;
 
-                    // Dynamic color based on temperature (heat increases closer to center)
                     const heat = Math.pow(1 - (newRadius - 5) / 7, 1.5);
 
                     if (heat > 0.8) {
-                        colors[i] = 1;
-                        colors[i + 1] = 1;
-                        colors[i + 2] = 1;
+                        colors[i] = 1; colors[i + 1] = 1; colors[i + 2] = 1;
                     } else if (heat > 0.6) {
-                        colors[i] = 0.9 + heat * 0.1;
-                        colors[i + 1] = 0.95 + heat * 0.05;
-                        colors[i + 2] = 1;
+                        colors[i] = 0.9 + heat * 0.1; colors[i + 1] = 0.95 + heat * 0.05; colors[i + 2] = 1;
                     } else if (heat > 0.4) {
-                        colors[i] = 1;
-                        colors[i + 1] = 0.9 + heat * 0.1;
-                        colors[i + 2] = 0.6 + heat * 0.3;
+                        colors[i] = 1; colors[i + 1] = 0.9 + heat * 0.1; colors[i + 2] = 0.6 + heat * 0.3;
                     } else if (heat > 0.2) {
-                        colors[i] = 1;
-                        colors[i + 1] = 0.5 + heat * 0.5;
-                        colors[i + 2] = 0.2 + heat * 0.4;
+                        colors[i] = 1; colors[i + 1] = 0.5 + heat * 0.5; colors[i + 2] = 0.2 + heat * 0.4;
                     } else {
-                        colors[i] = 1;
-                        colors[i + 1] = 0.3 + heat * 0.3;
-                        colors[i + 2] = 0.1 + heat * 0.2;
+                        colors[i] = 1; colors[i + 1] = 0.3 + heat * 0.3; colors[i + 2] = 0.1 + heat * 0.2;
                     }
 
-                    // Dynamic size based on heat and proximity
                     sizes[i / 3] = (0.6 + heat * 1.2) * (0.8 + Math.sin(frameCount * 0.05 + i) * 0.2);
                 }
             }
@@ -644,18 +633,13 @@ function animate() {
     // Rotate Galaxy Core
     if (galaxyCore) {
         galaxyCore.rotation.y += 0.001;
-
-        // Pulsing glow effect
         const pulse = 1 + Math.sin(time * 2) * 0.1;
         galaxyCore.scale.set(pulse, pulse, pulse);
     }
 
     // Rotate Spiral Arms
     spiralArms.forEach((arm, index) => {
-        // Different rotation speeds for each arm
         arm.rotation.y += 0.0003 + (index * 0.0001);
-
-        // Gentle vertical oscillation
         const positions = arm.geometry.attributes.position.array;
         for (let i = 1; i < positions.length; i += 3) {
             positions[i] += Math.sin(time + i * 0.1) * 0.005;
@@ -668,7 +652,6 @@ function animate() {
         nebulaCloud.rotation.y -= 0.0002;
         nebulaCloud.rotation.x = Math.sin(time * 0.5) * 0.05;
 
-        // Pulsing nebula particles
         const sizes = nebulaCloud.geometry.attributes.size.array;
         for (let i = 0; i < sizes.length; i++) {
             sizes[i] = (Math.sin(time * 2 + i * 0.1) + 1) * 1.5 + 1;
@@ -680,7 +663,6 @@ function animate() {
     if (starField) {
         starField.rotation.y += 0.00005;
 
-        // Random twinkling effect
         if (frameCount % 10 === 0) {
             const colors = starField.geometry.attributes.color.array;
             for (let i = 0; i < colors.length; i += 3) {
@@ -707,56 +689,64 @@ function animate() {
         cosmicDust.geometry.attributes.position.needsUpdate = true;
     }
 
-    // Gently orbit camera around galaxy
-    camera.position.x += Math.sin(time * 0.1) * 0.05;
-    camera.position.z += Math.cos(time * 0.1) * 0.05;
-    camera.lookAt(0, 0, 0);
+    // Animate Floating Shapes
+    floatingShapes.forEach((shape, index) => {
+        const userData = shape.userData;
 
-    // Mouse interaction - rotate view
+        // Floating animation
+        shape.position.y = userData.originalY + Math.sin(time * userData.speed + userData.phase) * 5;
+
+        // Rotation animation
+        shape.rotation.x += userData.rotationSpeed.x;
+        shape.rotation.y += userData.rotationSpeed.y;
+        shape.rotation.z += userData.rotationSpeed.z;
+
+        // Pulse opacity based on scroll
+        shape.material.opacity = 0.4 + Math.sin(time + index) * 0.2 + scrollProgress * 0.2;
+    });
+
+    // Camera orbit and mouse interaction
+    camera.position.x += Math.sin(time * 0.1) * 0.03;
+    camera.position.z += Math.cos(time * 0.1) * 0.03;
+
+    // Mouse interaction
     if (mouseX !== 0 || mouseY !== 0) {
-        targetX = mouseX * 0.0001;
-        targetY = mouseY * 0.0001;
-
-        camera.position.x += targetX;
-        camera.position.y += targetY;
+        camera.position.x += mouseX * 0.00005;
+        camera.position.y += mouseY * 0.00005;
     }
 
+    camera.lookAt(0, 0, 0);
     renderer.render(scene, camera);
 }
 
-// Mouse Movement Tracking
+// ==================== MOUSE TRACKING ====================
 document.addEventListener('mousemove', (event) => {
     mouseX = event.clientX - window.innerWidth / 2;
     mouseY = event.clientY - window.innerHeight / 2;
 });
 
-// Scroll-based Animations
+// ==================== SCROLL ANIMATIONS ====================
 let scrollY = window.scrollY;
 
 window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
 
-    // Calculate scroll progress (0 to 1)
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     scrollProgress = Math.min(scrollY / maxScroll, 1);
 
     // Zoom camera toward black hole based on scroll
     if (camera) {
-        // Start position: z=100, y=50
-        // End position: z=15, y=5 (close to black hole)
         const startZ = 100;
         const endZ = 15;
         const startY = 50;
         const endY = 5;
 
-        // Smooth easing function for dramatic effect
-        const easeProgress = scrollProgress * scrollProgress * (3 - 2 * scrollProgress); // smoothstep
+        const easeProgress = scrollProgress * scrollProgress * (3 - 2 * scrollProgress);
 
         camera.position.z = startZ - (startZ - endZ) * easeProgress;
         camera.position.y = startY - (startY - endY) * easeProgress;
         camera.lookAt(0, 0, 0);
 
-        // Increase FOV slightly as we get closer for intensity
         camera.fov = 60 + (scrollProgress * 20);
         camera.updateProjectionMatrix();
     }
@@ -768,9 +758,68 @@ window.addEventListener('scroll', () => {
     } else {
         navbar.classList.remove('scrolled');
     }
+
+    // Back to top button visibility
+    const backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+        if (scrollY > 500) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    }
+
+    // Update active nav link based on scroll position
+    updateActiveNavLink();
 });
 
-// Intersection Observer for Fade-in Animations
+// Update active navigation link
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${section.id}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
+// ==================== 3D CARD TILT EFFECT ====================
+function initCardTilt() {
+    const cards = document.querySelectorAll('.skill-category, .project-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+
+            card.style.setProperty('--rotate-x', `${-rotateX}deg`);
+            card.style.setProperty('--rotate-y', `${rotateY}deg`);
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--rotate-x', '0deg');
+            card.style.setProperty('--rotate-y', '0deg');
+        });
+    });
+}
+
+// ==================== INTERSECTION OBSERVER ====================
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
@@ -784,21 +833,30 @@ const observer = new IntersectionObserver((entries) => {
             // Animate skill bars
             if (entry.target.classList.contains('skill-category')) {
                 const skillBars = entry.target.querySelectorAll('.skill-progress');
-                skillBars.forEach(bar => {
+                skillBars.forEach((bar, index) => {
                     const progress = bar.getAttribute('data-progress');
                     setTimeout(() => {
                         bar.style.width = progress + '%';
-                    }, 200);
+                    }, 200 + index * 100);
                 });
             }
         }
     });
 }, observerOptions);
 
-// Observe all sections and elements
+// ==================== DOM CONTENT LOADED ====================
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Three.js
     initThree();
+
+    // Initialize 3D card tilt
+    initCardTilt();
+
+    // Hide loading screen after delay
+    const loadingScreen = document.getElementById('loading-screen');
+    setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+    }, 2500);
 
     // Add fade-in class to sections
     const sections = document.querySelectorAll('.section');
@@ -821,6 +879,26 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(card);
     });
 
+    // Mobile nav toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+
     // Smooth scroll for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -830,7 +908,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 60;
+                const offsetTop = targetSection.offsetTop - 80;
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
@@ -849,7 +927,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetSection = document.querySelector(href);
 
                 if (targetSection) {
-                    const offsetTop = targetSection.offsetTop - 60;
+                    const offsetTop = targetSection.offsetTop - 80;
                     window.scrollTo({
                         top: offsetTop,
                         behavior: 'smooth'
@@ -858,9 +936,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Back to top button
+    const backToTop = document.getElementById('back-to-top');
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });
 
-// Handle Window Resize
+// ==================== WINDOW RESIZE ====================
 window.addEventListener('resize', () => {
     if (camera && renderer) {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -869,113 +958,91 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Add floating animation to highlight items
-const highlightItems = document.querySelectorAll('.highlight-item');
-highlightItems.forEach((item, index) => {
-    item.style.animation = `float 3s ease -in -out ${index * 0.2}s infinite`;
-});
-
-// Add CSS for floating animation
-const style = document.createElement('style');
-style.textContent = `
-@keyframes float {
-    0 %, 100 % {
-        transform: translateY(0px);
-    }
-    50 % {
-        transform: translateY(-10px);
-    }
-}
-`;
-document.head.appendChild(style);
-
-// Performance optimization: Pause animations when tab is not visible
+// ==================== PERFORMANCE OPTIMIZATION ====================
 document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-        // Pause animations
         if (renderer) {
             renderer.setAnimationLoop(null);
         }
     } else {
-        // Resume animations
         if (renderer) {
             renderer.setAnimationLoop(animate);
         }
     }
 });
 
-// Add cursor trail effect
-const canvas = document.createElement('canvas');
-canvas.style.position = 'fixed';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.width = '100%';
-canvas.style.height = '100%';
-canvas.style.pointerEvents = 'none';
-canvas.style.zIndex = '999';
-document.body.appendChild(canvas);
+// ==================== CURSOR PARTICLE TRAIL ====================
+const cursorCanvas = document.createElement('canvas');
+cursorCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;';
+document.body.appendChild(cursorCanvas);
 
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const ctx = cursorCanvas.getContext('2d');
+cursorCanvas.width = window.innerWidth;
+cursorCanvas.height = window.innerHeight;
 
-class Particle {
+class CursorParticle {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 3 - 1.5;
-        this.speedY = Math.random() * 3 - 1.5;
-        this.color = `hsl(${Math.random() * 60 + 240}, 100 %, 50 %)`;
+        this.size = Math.random() * 4 + 1;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 2 - 1;
+        this.hue = Math.random() * 60 + 260; // Purple to cyan range
         this.life = 100;
     }
 
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        this.life -= 2;
+        this.life -= 3;
         if (this.size > 0.2) this.size -= 0.1;
     }
 
     draw() {
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.life / 100;
+        ctx.fillStyle = `hsla(${this.hue}, 100%, 60%, ${this.life / 100})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
-const particlesArray = [];
+const cursorParticles = [];
+let lastMouseX = 0, lastMouseY = 0;
 
 document.addEventListener('mousemove', (e) => {
-    for (let i = 0; i < 2; i++) {
-        particlesArray.push(new Particle(e.clientX, e.clientY));
+    // Only create particles if mouse moved significantly
+    const dist = Math.hypot(e.clientX - lastMouseX, e.clientY - lastMouseY);
+    if (dist > 5) {
+        for (let i = 0; i < 2; i++) {
+            cursorParticles.push(new CursorParticle(e.clientX, e.clientY));
+        }
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
     }
 });
 
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function animateCursorParticles() {
+    ctx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
 
-    for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
+    for (let i = cursorParticles.length - 1; i >= 0; i--) {
+        cursorParticles[i].update();
+        cursorParticles[i].draw();
 
-        if (particlesArray[i].life <= 0 || particlesArray[i].size <= 0.2) {
-            particlesArray.splice(i, 1);
-            i--;
+        if (cursorParticles[i].life <= 0 || cursorParticles[i].size <= 0.2) {
+            cursorParticles.splice(i, 1);
         }
     }
 
-    requestAnimationFrame(animateParticles);
+    requestAnimationFrame(animateCursorParticles);
 }
 
-animateParticles();
+animateCursorParticles();
 
 window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    cursorCanvas.width = window.innerWidth;
+    cursorCanvas.height = window.innerHeight;
 });
 
-console.log('%c🚀 Portfolio by Tanveer Raza', 'font-size: 20px; color: #7c3aed; font-weight: bold;');
-console.log('%cFull Stack Developer | PHP Laravel | Python Django | Vue | React | React Native | Flutter', 'font-size: 12px; color: #06b6d4;');
+// ==================== CONSOLE BRANDING ====================
+console.log('%c🚀 Portfolio by Tanveer Raza', 'font-size: 24px; color: #9d4edd; font-weight: bold; text-shadow: 0 0 20px #9d4edd;');
+console.log('%cFull Stack Developer | PHP Laravel | Python Django | Vue | React | React Native | Flutter', 'font-size: 14px; color: #00d9ff;');
