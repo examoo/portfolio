@@ -1,5 +1,8 @@
 /* ==================== RESET & BASE ==================== */
 :root {
+    scroll-behavior: smooth;
+
+    /* Colors - Deep Dark */
     --color-bg: #0a0a0a;
     --color-text-main: #ededed;
     --color-text-muted: #a1a1aa;
@@ -8,7 +11,8 @@
 
     --font-family: 'Inter', sans-serif;
 
-    --max-width: 700px;
+    --max-width: 650px;
+    /* Tighter professional column */
 }
 
 * {
@@ -23,7 +27,8 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    font-size: 15px;
+    font-size: 14.5px;
+    /* Refined base size */
 }
 
 a {
@@ -46,45 +51,48 @@ a {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    padding-bottom: 4rem;
+    gap: 5rem;
+    /* More generous spacing between sections */
+    padding-bottom: 5rem;
 }
 
 /* ==================== HEADER ==================== */
 .site-header {
     padding: 2rem 0;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: center;
     position: sticky;
     top: 1rem;
     z-index: 50;
+    opacity: 0;
+    animation: fadeInDown 0.8s ease forwards;
 }
 
 .header-inner {
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 10, 10, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 0.35rem 0.5rem;
     border-radius: 9999px;
-    /* Pill shape */
     display: flex;
     align-items: center;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px -1px rgba(0, 0, 0, 0.2);
 }
 
 .site-nav {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.2rem;
 }
 
 .nav-link {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    /* Smaller, punchier font */
     color: var(--color-text-muted);
     font-weight: 500;
-    padding: 0.4rem 0.8rem;
+    padding: 0.4rem 0.75rem;
     border-radius: 9999px;
     transition: all 0.2s ease;
 }
@@ -96,39 +104,95 @@ a {
 
 .nav-link.active {
     color: var(--color-text-main);
-    background: var(--color-hover-bg);
 }
 
-/* Specific button style for Resume if desired, or keep uniform */
-/* .nav-link:nth-child(2) { ... } */
-
-/* ==================== HERO & GENERAL CONTENT ==================== */
-.page-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--color-text-main);
+/* Status Badge */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    padding: 0.35rem 0.7rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    margin-left: 0.5rem;
 }
 
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== HERO ==================== */
 .hero-section {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     margin-top: 1rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards 0.2s;
+    /* Delay */
 }
 
 .hero-title {
-    font-size: 3rem;
+    font-size: 2.8rem;
     line-height: 1.1;
     font-weight: 700;
+    letter-spacing: -0.03em;
 }
 
 .hero-title .text-muted {
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: var(--color-text-muted);
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     font-weight: 500;
+    letter-spacing: -0.01em;
 }
 
 /* Stats */
@@ -136,6 +200,8 @@ a {
     display: flex;
     gap: 3rem;
     margin-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
 }
 
 .stat-item {
@@ -154,7 +220,23 @@ a {
     color: var(--color-text-muted);
 }
 
-/* ==================== CARDS & LISTS ==================== */
+/* ==================== CONTENT SECTIONS ==================== */
+.content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.section-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+}
+
+/* ==================== CARDS ==================== */
 .text-content {
     color: var(--color-text-muted);
     font-size: 1rem;
@@ -165,14 +247,18 @@ a {
 .card-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem;
+    /* More spacing between items */
 }
 
 .content-card {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    transition: transform 0.2s ease;
 }
+
+/* Hover effect on larger touch targets if necessary, but keep clean text by default */
 
 .card-header {
     display: flex;
@@ -183,26 +269,26 @@ a {
 }
 
 .card-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--color-text-main);
 }
 
 .card-subtitle {
     color: var(--color-text-muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 .card-meta {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--color-text-muted);
     font-family: monospace;
-    /* Sometimes used for dates, or just verify with reference */
 }
 
 .card-body {
     color: var(--color-text-muted);
     font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .card-body ul {
@@ -210,14 +296,14 @@ a {
     padding-left: 1.2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.35rem;
     margin-top: 0.5rem;
 }
 
 .card-links {
     display: flex;
     gap: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
 }
 
 .card-link {
@@ -232,26 +318,46 @@ a {
     text-decoration-color: var(--color-text-main);
 }
 
+.project-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.project-tags span {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
 /* ==================== FOOTER ==================== */
 .site-footer {
     border-top: 1px solid var(--color-border);
     padding-top: 2rem;
     margin-top: auto;
-    /* Push to bottom */
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: center;
+    /* Center footer */
+    text-align: center;
 }
 
 .footer-links {
     display: flex;
     gap: 1.5rem;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .footer-links a {
     color: var(--color-text-muted);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: color 0.2s;
 }
 
@@ -259,12 +365,35 @@ a {
     color: var(--color-text-main);
 }
 
+.footer-copy {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+}
+
 /* ==================== UTILS ==================== */
 .garage-icon {
     font-style: normal;
 }
 
+/* Scroll Animation Classes */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, visibility;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
 @media (max-width: 600px) {
+    .site-header {
+        position: sticky;
+        /* Keep sticky on mobile */
+    }
+
     .hero-title {
         font-size: 2.25rem;
     }
@@ -272,14 +401,13 @@ a {
     .hero-stats {
         flex-direction: column;
         gap: 1.5rem;
+        border-top: none;
+        /* Cleaner mobile */
     }
 
     .site-nav {
-        /* On mobile, maybe allow horizontal scroll if too many items */
         overflow-x: auto;
-        padding-bottom: 0px;
-        max-width: 100%;
-        /* Hide scrollbar */
+        padding-bottom: 0;
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
@@ -289,7 +417,7 @@ a {
     }
 
     .header-inner {
-        max-width: 90vw;
+        max-width: 92vw;
         justify-content: flex-start;
     }
 }

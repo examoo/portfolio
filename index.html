@@ -25,15 +25,20 @@
     <div class="layout-container">
 
         <!-- Header -->
-        <header class="site-header">
+        <header class="site-header fade-in">
             <div class="header-inner">
                 <nav class="site-nav">
-                    <a href="index.html" class="nav-link active">Home</a>
-                    <a href="about.html" class="nav-link">Resume</a>
-                    <a href="experience.html" class="nav-link">Experience</a>
-                    <a href="projects.html" class="nav-link">Projects</a>
-                    <a href="garage.html" class="nav-link">Garage <i class="garage-icon">🔧</i></a>
-                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">Resume</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#garage" class="nav-link">Garage 🔧</a>
+                    <a href="#blog" class="nav-link">Blog</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <div class="status-badge">
+                        <span class="status-dot"></span>
+                        Available
+                    </div>
                 </nav>
             </div>
         </header>
@@ -41,7 +46,7 @@
         <main class="main-content">
 
             <!-- Hero Section -->
-            <section class="hero-section">
+            <section id="home" class="hero-section fade-in">
                 <h1 class="hero-title">
                     I'm Tanveer,
                     <span class="text-muted">Software Developer & AI Enthusiast</span>
@@ -64,18 +69,223 @@
                 </div>
             </section>
 
-            <!-- Intro/Footer overlap for Home -->
-            <footer class="site-footer">
-                <div class="footer-header">
-                    <h2>Let's work together</h2>
-                    <p>Open for new opportunities and collaborations.</p>
+            <!-- About/Resume Section -->
+            <section id="about" class="content-section fade-in-section">
+                <h2 class="section-title">About Me</h2>
+                <div class="text-content">
+                    <p>My journey into tech started with a simple question: "How does this work?" That curiosity led me
+                        to explore full-stack development, distributed systems, and AI.</p>
+                    <br>
+                    <p>Today, I've built solutions that solve complex problems — from scalable e-commerce platforms to
+                        AI-powered data analysis tools. Each project taught me that great software isn't just about
+                        clean code — it's about delivering real impact.</p>
                 </div>
+
+                <div class="card-list" style="margin-top: 2rem;">
+                    <div class="content-card">
+                        <h3 class="card-title">Building products that matter.</h3>
+                        <p class="card-body">I'm most energized when working on products that solve real problems.
+                            Meaningful challenges drive me.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <h3 class="card-title">Ownership & autonomy.</h3>
+                        <p class="card-body">I thrive when given ownership of features end-to-end. Trust me with a
+                            problem, and I'll deliver the solution.</p>
+                    </div>
+
+                    <div class="content-card">
+                        <a href="#" class="nav-link"
+                            style="background: rgba(255,255,255,0.05); width: fit-content; margin-top: 0.5rem; padding: 0.5rem 1rem;">Download
+                            Resume -></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="content-section fade-in-section">
+                <div class="section-header">
+                    <h2 class="section-title">Work Experience</h2>
+                </div>
+
+                <div class="card-list">
+                    <!-- TechSolutions Inc. -->
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Senior Full Stack Developer</h3>
+                            <span class="card-meta">2023 - Present</span>
+                        </div>
+                        <span class="card-subtitle">TechSolutions Inc.</span>
+                        <div class="card-body">
+                            Architected and built a comprehensive enterprise platform serving as a centralized hub for
+                            data analytics.
+                            <ul>
+                                <li>Reduced API response times by ~40% by implementing caching strategies and optimizing
+                                    database queries using Laravel and Redis.</li>
+                                <li>Engineered a microservices architecture using Python/Django to handle heavy data
+                                    processing tasks asynchronously.</li>
+                                <li>Designed a robust PostgreSQL schema (20+ tables) secured by Row Level Security (RLS)
+                                    policies.</li>
+                                <li>Maintained 100% test coverage across core modules, utilizing strict typing to
+                                    eliminate runtime errors.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Creative Agency -->
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Web Developer</h3>
+                            <span class="card-meta">2021 - 2023</span>
+                        </div>
+                        <span class="card-subtitle">Creative Agency</span>
+                        <div class="card-body">
+                            Developed interactive web experiences and marketing sites for high-profile clients.
+                            <ul>
+                                <li>Built high-performance frontend interfaces using Vue.js and React, achieving 95+
+                                    Lifecycle scores on Core Web Vitals.</li>
+                                <li>Engineered an image preprocessing pipeline using optimize libraries to normalize
+                                    inputs and improve load times.</li>
+                                <li>Collaborated with design teams to implement pixel-perfect, responsive layouts.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="content-section fade-in-section">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-subtitle">A selection of projects I've built.</p>
+                </div>
+
+                <div class="card-list">
+                    <!-- Project 1 -->
+                    <div class="content-card">
+                        <h3 class="card-title">Cloud Janitor (FinOps Agent)</h3>
+                        <div class="card-body">
+                            Autonomous AI agent that detects wasted cloud resources and proposes safe Terraform cleanup
+                            code. Features a human-in-the-loop approval workflow to ensure safety before destruction.
+                            <ul>
+                                <li>AI-Powered Waste Detection using Gemini-based analysis.</li>
+                                <li>Structured JSON reports with savings breakdowns via Kestra.</li>
+                            </ul>
+                        </div>
+                        <div class="card-links">
+                            <a href="#" class="card-link">Live Demo</a>
+                            <a href="#" class="card-link">Source Code</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="content-card">
+                        <h3 class="card-title">SensAI Career Coach</h3>
+                        <div class="card-body">
+                            Full-stack AI platform offering resume analysis and career guidance. Built with an
+                            event-driven architecture using Inngest to handle complex AI workflows asynchronously.
+                            <ul>
+                                <li>Generates tailored career documents using LLMs.</li>
+                                <li>Interview Preparation Module with adaptive feedback loops.</li>
+                            </ul>
+                        </div>
+                        <div class="card-links">
+                            <a href="#" class="card-link">Source Code</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="content-card">
+                        <h3 class="card-title">RAG Resume Analyzer</h3>
+                        <div class="card-body">
+                            Cost-effective document analysis tool. Uses local embeddings to chat with PDFs without
+                            hitting API rate limits, with Gemini handling the reasoning.
+                            <ul>
+                                <li>Local Embeddings: Zero API costs for processing documents.</li>
+                                <li>Built on LlamaIndex for robust document indexing.</li>
+                            </ul>
+                        </div>
+                        <div class="card-links">
+                            <a href="#" class="card-link">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Garage Section -->
+            <section id="garage" class="content-section fade-in-section">
+                <h2 class="section-title">The Garage 🔧</h2>
+                <div class="text-content">
+                    <p>My digital garden of experiments, active projects, and learning roadmap.</p>
+                </div>
+
+                <h3 class="card-title" style="margin-top: 1.5rem; font-size: 1rem;">Currently I'm learning!</h3>
+                <div class="card-list" style="margin-top: 0.5rem;">
+                    <div class="content-card">
+                        <h3 class="card-title">Autonomous Agents & RAG</h3>
+                        <p class="card-body">Exploring LLM orchestration, vector databases, and agentic workflows.</p>
+                    </div>
+                    <div class="content-card">
+                        <h3 class="card-title">Full Stack Engineering</h3>
+                        <p class="card-body">Building scalable web applications with modern frameworks, serverless
+                            architecture, and robust databases.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog Section -->
+            <section id="blog" class="content-section fade-in-section">
+                <h2 class="section-title">Blog</h2>
+                <div class="card-list">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <h3 class="card-title"><a href="#" class="card-link"
+                                    style="text-decoration: none; color: inherit;">Building InfiJobs: My First
+                                    Project</a></h3>
+                            <span class="card-meta">Jan 01, 2026</span>
+                        </div>
+                        <p class="card-body">
+                            Lessons from my first real project—how I handled AI-based code evaluation, database
+                            security, and performance as a junior developer.
+                        </p>
+                        <div class="project-tags" style="margin-top: 0.5rem;">
+                            <span>React</span>
+                            <span>Supabase</span>
+                            <span>Serverless</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="content-section fade-in-section">
+                <h2 class="section-title">Contact</h2>
+                <p class="text-content">Have a project in mind? I'd love to hear about it. Let's create something
+                    exceptional together.</p>
+                <div class="card-list" style="margin-top: 1rem;">
+                    <div class="content-card">
+                        <div class="card-body">
+                            <ul
+                                style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <li><a href="mailto:tanveer.raza@example.com" class="card-link"
+                                        style="font-size: 1rem;">tanveer.raza@example.com</a></li>
+                                <li><a href="#" class="card-link">LinkedIn</a></li>
+                                <li><a href="#" class="card-link">GitHub</a></li>
+                                <li><a href="#" class="card-link">Twitter</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="site-footer fade-in-section">
                 <div class="footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="experience.html">Experience</a>
-                    <a href="projects.html">Projects</a>
-                    <a href="garage.html">Garage</a>
-                    <a href="about.html">Contact</a>
+                    <a href="#home">Home</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#garage">Garage</a>
+                    <a href="#contact">Contact</a>
                 </div>
                 <div class="footer-copy">
                     &copy; 2026 Tanveer Raza. All rights reserved.
