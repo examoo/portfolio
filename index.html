@@ -5,417 +5,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Tanveer Raza - Full Stack Developer specializing in PHP Laravel, Python Django, Vue, React, React Native, and Flutter. Building exceptional digital experiences.">
-    <meta name="keywords"
-        content="Full Stack Developer, PHP Laravel, Python Django, Vue, React, React Native, Flutter, Web Development, Mobile App Development, Software Engineer">
-    <meta name="author" content="Tanveer Raza">
-    <meta name="theme-color" content="#030014">
-    <meta name="robots" content="index, follow">
+        content="Tanveer Raza - Full Stack Developer specializing in PHP Laravel, Python Django, and Modern Web Tech.">
+    <title>Tanveer Raza | Software Developer</title>
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Tanveer Raza | Full Stack Developer">
-    <meta property="og:description"
-        content="Full Stack Developer specializing in PHP Laravel, Python Django, Vue, React, React Native, and Flutter.">
-    <meta property="og:url" content="https://tanveerraza.dev">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tanveer Raza | Full Stack Developer">
-    <meta name="twitter:description"
-        content="Full Stack Developer specializing in PHP Laravel, Python Django, Vue, React, React Native, and Flutter.">
-
-    <title>Tanveer Raza | Full Stack Developer</title>
-
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Stylesheet -->
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Script -->
+    <script src="script.js" defer></script>
 </head>
 
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loading-screen">
-        <div class="loading-logo">TR</div>
-        <div class="loading-bar">
-            <div class="loading-bar-progress"></div>
-        </div>
+
+    <div class="layout-container">
+
+        <!-- Header -->
+        <header class="site-header">
+            <div class="header-inner">
+                <a href="#" class="logo">Tanveer Raza</a>
+                <nav class="site-nav">
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <!-- <a href="#contact" class="nav-link">Contact</a> -->
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <!-- Hero Section -->
+            <section id="home" class="hero-section">
+                <h1 class="hero-title">
+                    <span class="block text-muted">I'm Tanveer,</span>
+                    <span class="block text-primary">Software Developer</span>
+                </h1>
+
+                <div class="hero-intro">
+                    <p>A Software Developer specializing in building high-performance web applications, scalable
+                        platforms, and digital experiences.</p>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">5+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">50+</span>
+                        <span class="stat-label">Projects Shipped</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">What I've been up to</h2>
+                </div>
+
+                <div class="experience-list">
+                    <div class="experience-item">
+                        <div class="exp-role">Senior Full Stack Developer</div>
+                        <div class="exp-company">TechSolutions Inc.</div>
+                        <div class="exp-date">2023 - Present</div>
+                        <p class="exp-desc">Leading backend development with Laravel & Python. Architecting scalable
+                            microservices.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="exp-role">Web Developer</div>
+                        <div class="exp-company">Creative Agency</div>
+                        <div class="exp-date">2021 - 2023</div>
+                        <p class="exp-desc">Built interactive web apps using Vue.js and React. Optimized performance and
+                            SEO.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-subtitle">A selection of projects I've built.</p>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3 class="project-title"><a href="#">E-Commerce Platform</a></h3>
+                            <p class="project-desc">Full-featured e-commerce app with Stripe integration and inventory
+                                management.</p>
+                            <div class="project-tags">
+                                <span>Laravel</span>
+                                <span>Vue.js</span>
+                                <span>MySQL</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3 class="project-title"><a href="#">Analytics Dashboard</a></h3>
+                            <p class="project-desc">Real-time analytics visualization tool for business intelligence.
+                            </p>
+                            <div class="project-tags">
+                                <span>Django</span>
+                                <span>React</span>
+                                <span>D3.js</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3 -->
+                    <article class="project-card">
+                        <div class="project-content">
+                            <h3 class="project-title"><a href="#">Fitness Tracker App</a></h3>
+                            <p class="project-desc">Cross-platform mobile application for workout and nutrition
+                                tracking.</p>
+                            <div class="project-tags">
+                                <span>Flutter</span>
+                                <span>Firebase</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Current Focus -->
+            <section id="building" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">What I'm Building</h2>
+                </div>
+                <div class="current-list">
+                    <div class="current-item">
+                        <span class="item-icon">🚀</span>
+                        <div class="item-content">
+                            <strong>Portfolio V2</strong>
+                            <span>Redesigning my personal site for better performance and aesthetics.</span>
+                        </div>
+                    </div>
+                    <div class="current-item">
+                        <span class="item-icon">🤖</span>
+                        <div class="item-content">
+                            <strong>AI Chat Assistant</strong>
+                            <span>Experimenting with LLMs and RAG for custom knowledge bases.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact/Footer -->
+            <footer class="site-footer">
+                <div class="footer-header">
+                    <h2>Let's work together</h2>
+                    <p>Open for new opportunities and collaborations.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:tanveer.raza@example.com">Email</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                </div>
+                <div class="footer-copy">
+                    &copy; 2026 Tanveer Raza. All rights reserved.
+                </div>
+            </footer>
+
+        </main>
     </div>
 
-    <!-- Three.js Canvas for 3D Background -->
-    <canvas id="bg-canvas"></canvas>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">TR</a>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="greeting">Hi, I'm</span>
-                    <span class="name">Tanveer Raza</span>
-                </h1>
-                <h2 class="hero-subtitle">Full Stack Developer</h2>
-                <p class="hero-description">
-                    Crafting exceptional digital experiences with modern technologies.
-                    Specialized in building scalable web and mobile applications
-                    that make a difference.
-                </p>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">
-                        <span>View My Work</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <p>Scroll Down</p>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section section-about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="about-intro">
-                        I'm a passionate Full Stack Developer with expertise in building modern web and mobile
-                        applications.
-                        With a strong foundation in both backend and frontend technologies, I create seamless user
-                        experiences
-                        backed by robust, scalable architectures.
-                    </p>
-                    <p class="about-description">
-                        My journey in software development has led me to master multiple frameworks and languages,
-                        allowing me to choose the best tools for each project. I thrive on solving complex problems
-                        and turning innovative ideas into reality.
-                    </p>
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-number">5+</div>
-                            <div class="highlight-label">Years Experience</div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-number">50+</div>
-                            <div class="highlight-label">Projects Completed</div>
-                        </div>
-                        <div class="highlight-item">
-                            <div class="highlight-number">30+</div>
-                            <div class="highlight-label">Happy Clients</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section section-skills">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <p class="section-subtitle">Technologies I work with to bring ideas to life</p>
-
-            <div class="skills-grid">
-                <!-- Backend -->
-                <div class="skill-category">
-                    <div class="category-icon">🔧</div>
-                    <h3 class="category-title">Backend Development</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <div class="skill-name">PHP Laravel</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Python Django</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="85"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Frontend -->
-                <div class="skill-category">
-                    <div class="category-icon">💎</div>
-                    <h3 class="category-title">Frontend Development</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <div class="skill-name">React</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="90"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Vue.js</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="85"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mobile -->
-                <div class="skill-category">
-                    <div class="category-icon">📱</div>
-                    <h3 class="category-title">Mobile Development</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <div class="skill-name">React Native</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="88"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Flutter</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="82"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Agentic AI -->
-                <div class="skill-category">
-                    <div class="category-icon">🤖</div>
-                    <h3 class="category-title">Agentic AI</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <div class="skill-name">n8n Automation</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="85"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">Langflow AI</div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-progress="80"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tools & Others -->
-                <div class="skill-category">
-                    <div class="category-icon">⚡</div>
-                    <h3 class="category-title">Tools & Technologies</h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Git</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">AWS</span>
-                        <span class="tech-tag">REST APIs</span>
-                        <span class="tech-tag">GraphQL</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">MongoDB</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section section-projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Some of my recent work</p>
-
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project →</a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">E-Commerce Platform</h3>
-                        <p class="project-description">
-                            Full-featured e-commerce application built with Laravel backend and Vue.js frontend.
-                            Features include payment integration, inventory management, and admin dashboard.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Laravel</span>
-                            <span class="tech-badge">Vue.js</span>
-                            <span class="tech-badge">MySQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project →</a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Social Media Dashboard</h3>
-                        <p class="project-description">
-                            Real-time analytics dashboard built with Django REST framework and React.
-                            Features data visualization, user engagement metrics, and automated reporting.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Django</span>
-                            <span class="tech-badge">React</span>
-                            <span class="tech-badge">PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project →</a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Fitness Tracking App</h3>
-                        <p class="project-description">
-                            Cross-platform mobile application built with Flutter. Features workout tracking,
-                            nutrition planning, progress charts, and social sharing capabilities.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Flutter</span>
-                            <span class="tech-badge">Firebase</span>
-                            <span class="tech-badge">API Integration</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-overlay">
-                            <a href="#" class="project-link">View Project →</a>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 class="project-title">Task Management System</h3>
-                        <p class="project-description">
-                            Collaborative task management application built with React Native.
-                            Features include team collaboration, real-time updates, and push notifications.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-badge">React Native</span>
-                            <span class="tech-badge">Node.js</span>
-                            <span class="tech-badge">MongoDB</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section section-contact">
-        <div class="container">
-            <h2 class="section-title">Let's Work Together</h2>
-            <p class="section-subtitle">Have a project in mind? Let's create something amazing!</p>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <p>tanveer.raza@example.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div class="contact-details">
-                            <h3>Phone</h3>
-                            <p>+92 XXX XXXXXXX</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div class="contact-details">
-                            <h3>Location</h3>
-                            <p>Available for Remote Work</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="social-links">
-                    <h3 class="social-title">Connect With Me</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon" aria-label="GitHub">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Tanveer Raza. All rights reserved.</p>
-            <p class="footer-tagline">Built with ❤️ and Three.js</p>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 15l-6-6-6 6" />
-        </svg>
-    </button>
-
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- Main Script -->
-    <script src="script.js"></script>
 </body>
 
 </html>
