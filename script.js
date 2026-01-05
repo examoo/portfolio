@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initMobileNav();
     initScrollObserver();
-    // initContactForm(); // Keep if needed, or simplify
 });
 
 // ==================== SMOOTH SCROLL ====================
@@ -15,8 +14,6 @@ function initSmoothScroll() {
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth' });
-
-                // Update URL hash without jumping
                 history.pushState(null, null, this.getAttribute('href'));
             }
         });
@@ -36,7 +33,6 @@ function initMobileNav() {
         navMenu.classList.toggle('active');
     });
 
-    // Close menu when clicking a link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             navToggle.classList.remove('active');
@@ -45,16 +41,16 @@ function initMobileNav() {
     });
 }
 
-// ==================== ACTIVE SECTION OBSERVER ====================
+// ==================== ACTIVE SECTION & SCROLL REVEAL OBSERVER ====================
 function initScrollObserver() {
-    const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    const observer = new IntersectionObserver((entries) => {
+    // Observer for Active Navigation Link
+    const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
-
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${id}`) {
@@ -63,7 +59,23 @@ function initScrollObserver() {
                 });
             }
         });
-    }, { threshold: 0.3 }); // Trigger when 30% visible
+    }, { threshold: 0.3 });
 
-    sections.forEach(section => observer.observe(section));
+    // Observer for Fade In Animation
+    const fadeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+        navObserver.observe(section);
+        // Observe for fade-in only if it has the class
+        if (section.classList.contains('fade-in-section')) {
+            fadeObserver.observe(section);
+        }
+    });
 }
