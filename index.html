@@ -5,292 +5,656 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Tanveer Raza - Full Stack Developer specializing in PHP Laravel, Python Django, and Modern Web Tech.">
-    <title>Tanveer Raza | Software Developer</title>
+        content="Tanveer Raza - Full Stack Developer specializing in PHP Laravel, Python Django, Vue.js, React, and Agentic AI solutions.">
+    <meta name="keywords"
+        content="Full Stack Developer, PHP, Laravel, Python, Django, Vue.js, React, Agentic AI, Web Development">
+    <meta name="author" content="Tanveer Raza">
+    <title>Tanveer Raza | Full Stack Developer & AI Engineer</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Script -->
-    <script src="script.js" defer></script>
 </head>
 
 <body>
 
-    <div class="layout-container">
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">Tanveer<span>.</span></a>
 
-        <!-- Header -->
-        <header class="site-header fade-in">
-            <div class="header-inner">
-                <nav class="site-nav">
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#about" class="nav-link">Resume</a>
-                    <a href="#experience" class="nav-link">Experience</a>
-                    <a href="#projects" class="nav-link">Projects</a>
-                    <a href="#garage" class="nav-link">Garage 🔧</a>
-                    <a href="#blog" class="nav-link">Blog</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                    <div class="status-badge">
-                        <span class="status-dot"></span>
-                        Available
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#garage" class="nav-link">Garage</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    Available for Work
+                </div>
+            </nav>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero section">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="hero-greeting fade-in">👋 Hello, I'm</p>
+                    <h1 class="hero-name fade-in stagger-1">
+                        Tanveer <span class="gradient-text">Raza</span>
+                    </h1>
+                    <p class="hero-role fade-in stagger-2">
+                        Full Stack Developer & Agentic AI Engineer
+                    </p>
+                    <p class="hero-description fade-in stagger-3">
+                        I build scalable web applications and intelligent AI solutions. Specializing in Laravel, Django,
+                        Vue.js, React, and cutting-edge Agentic AI systems that solve real-world problems.
+                    </p>
+
+                    <!-- Tech Stack -->
+                    <div class="tech-stack fade-in stagger-4">
+                        <span class="tech-pill">
+                            <span class="tech-pill-icon">🐘</span> PHP Laravel
+                        </span>
+                        <span class="tech-pill">
+                            <span class="tech-pill-icon">🐍</span> Python Django
+                        </span>
+                        <span class="tech-pill">
+                            <span class="tech-pill-icon">💚</span> Vue.js
+                        </span>
+                        <span class="tech-pill">
+                            <span class="tech-pill-icon">⚛️</span> React
+                        </span>
+                        <span class="tech-pill">
+                            <span class="tech-pill-icon">🤖</span> Agentic AI
+                        </span>
                     </div>
-                </nav>
+
+                    <!-- CTA Buttons -->
+                    <div class="cta-group fade-in stagger-5">
+                        <a href="#projects" class="btn btn-primary">View My Work →</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="hero-stats fade-in">
+                        <div class="stat-item">
+                            <div class="stat-value">5+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">50+</div>
+                            <div class="stat-label">Projects Delivered</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">20+</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </header>
+        </section>
 
-        <main class="main-content">
+        <!-- About Section -->
+        <section id="about" class="about section">
+            <div class="container">
+                <div class="section-narrow">
+                    <span class="section-label fade-in">About Me</span>
+                    <h2 class="section-title fade-in">Passionate About Building <span class="gradient-text">Digital
+                            Solutions</span></h2>
 
-            <!-- Hero Section -->
-            <section id="home" class="hero-section fade-in">
-                <h1 class="hero-title">
-                    I'm Tanveer,
-                    <span class="text-muted">Software Developer & AI Enthusiast</span>
-                </h1>
-
-                <!-- Stats Grid -->
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-value">5+</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">50+</span>
-                        <span class="stat-label">Projects Shipped</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-value">100+</span>
-                        <span class="stat-label">GitHub Contributions</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- About/Resume Section -->
-            <section id="about" class="content-section fade-in-section">
-                <h2 class="section-title">About Me</h2>
-                <div class="text-content">
-                    <p>My journey into tech started with a simple question: "How does this work?" That curiosity led me
-                        to explore full-stack development, distributed systems, and AI.</p>
-                    <br>
-                    <p>Today, I've built solutions that solve complex problems — from scalable e-commerce platforms to
-                        AI-powered data analysis tools. Each project taught me that great software isn't just about
-                        clean code — it's about delivering real impact.</p>
-                </div>
-
-                <div class="card-list">
-                    <div class="content-card">
-                        <h3 class="card-title">Building products that matter.</h3>
-                        <p class="card-body">I'm most energized when working on products that solve real problems.
-                            Meaningful challenges drive me.</p>
+                    <div class="about-content fade-in">
+                        <p>
+                            I'm a Full Stack Developer with 5+ years of experience crafting robust web applications and
+                            intelligent systems. My journey started with a simple curiosity about how things work on
+                            the web, which evolved into a deep passion for building scalable, user-centric solutions.
+                        </p>
+                        <p>
+                            Today, I specialize in building enterprise-grade applications using PHP Laravel and Python
+                            Django for backend systems, paired with Vue.js and React for dynamic frontend experiences.
+                            I'm particularly excited about the intersection of web development and AI, creating agentic
+                            systems that automate complex workflows.
+                        </p>
                     </div>
 
-                    <div class="content-card">
-                        <h3 class="card-title">Ownership & autonomy.</h3>
-                        <p class="card-body">I thrive when given ownership of features end-to-end. Trust me with a
-                            problem, and I'll deliver the solution.</p>
-                    </div>
-
-                    <div class="content-card">
-                        <a href="#" class="btn-download">Download
-                            Resume -></a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Experience Section -->
-            <section id="experience" class="content-section fade-in-section">
-                <div class="section-header">
-                    <h2 class="section-title">Work Experience</h2>
-                </div>
-
-                <div class="card-list">
-                    <!-- TechSolutions Inc. -->
-                    <div class="content-card">
-                        <div class="card-header">
-                            <h3 class="card-title">Senior Full Stack Developer</h3>
-                            <span class="card-meta">2023 - Present</span>
+                    <div class="about-highlights fade-in">
+                        <div class="highlight-card">
+                            <div class="highlight-icon">🎯</div>
+                            <h3 class="highlight-title">Problem Solver</h3>
+                            <p class="highlight-text">Turning complex challenges into elegant, maintainable solutions.
+                            </p>
                         </div>
-                        <span class="card-subtitle">TechSolutions Inc.</span>
-                        <div class="card-body">
-                            Architected and built a comprehensive enterprise platform serving as a centralized hub for
-                            data analytics.
-                            <ul>
-                                <li>Reduced API response times by ~40% by implementing caching strategies and optimizing
-                                    database queries using Laravel and Redis.</li>
-                                <li>Engineered a microservices architecture using Python/Django to handle heavy data
-                                    processing tasks asynchronously.</li>
-                                <li>Designed a robust PostgreSQL schema (20+ tables) secured by Row Level Security (RLS)
-                                    policies.</li>
-                                <li>Maintained 100% test coverage across core modules, utilizing strict typing to
-                                    eliminate runtime errors.</li>
-                            </ul>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">🚀</div>
+                            <h3 class="highlight-title">Fast Learner</h3>
+                            <p class="highlight-text">Always exploring new technologies and best practices.</p>
                         </div>
-                    </div>
-
-                    <!-- Creative Agency -->
-                    <div class="content-card">
-                        <div class="card-header">
-                            <h3 class="card-title">Web Developer</h3>
-                            <span class="card-meta">2021 - 2023</span>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">🤝</div>
+                            <h3 class="highlight-title">Team Player</h3>
+                            <p class="highlight-text">Collaborative approach with clear communication.</p>
                         </div>
-                        <span class="card-subtitle">Creative Agency</span>
-                        <div class="card-body">
-                            Developed interactive web experiences and marketing sites for high-profile clients.
-                            <ul>
-                                <li>Built high-performance frontend interfaces using Vue.js and React, achieving 95+
-                                    Lifecycle scores on Core Web Vitals.</li>
-                                <li>Engineered an image preprocessing pipeline using optimize libraries to normalize
-                                    inputs and improve load times.</li>
-                                <li>Collaborated with design teams to implement pixel-perfect, responsive layouts.</li>
-                            </ul>
+                        <div class="highlight-card">
+                            <div class="highlight-icon">💡</div>
+                            <h3 class="highlight-title">Innovation Driven</h3>
+                            <p class="highlight-text">Passionate about AI and emerging technologies.</p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Projects Section -->
-            <section id="projects" class="content-section fade-in-section">
-                <div class="section-header">
-                    <h2 class="section-title">Featured Projects</h2>
-                    <p class="section-subtitle">A selection of projects I've built.</p>
+        <!-- Skills Section -->
+        <section id="skills" class="skills section">
+            <div class="container">
+                <div class="section-narrow">
+                    <span class="section-label fade-in">Technical Skills</span>
+                    <h2 class="section-title fade-in">My <span class="gradient-text">Tech Stack</span></h2>
+                    <p class="section-subtitle fade-in">Technologies and tools I work with to bring ideas to life.</p>
                 </div>
 
-                <div class="card-list">
+                <div class="skills-grid">
+                    <!-- Backend -->
+                    <div class="skill-category fade-in">
+                        <div class="skill-category-icon">⚙️</div>
+                        <h3 class="skill-category-title">Backend Development</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">PHP</span>
+                            <span class="skill-tag">Laravel</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">GraphQL</span>
+                        </div>
+                    </div>
+
+                    <!-- Frontend -->
+                    <div class="skill-category fade-in">
+                        <div class="skill-category-icon">🎨</div>
+                        <h3 class="skill-category-title">Frontend Development</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">Tailwind CSS</span>
+                            <span class="skill-tag">Next.js</span>
+                            <span class="skill-tag">Nuxt.js</span>
+                        </div>
+                    </div>
+
+                    <!-- Database -->
+                    <div class="skill-category fade-in">
+                        <div class="skill-category-icon">🗄️</div>
+                        <h3 class="skill-category-title">Database & Storage</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Supabase</span>
+                            <span class="skill-tag">Firebase</span>
+                        </div>
+                    </div>
+
+                    <!-- AI/ML -->
+                    <div class="skill-category fade-in">
+                        <div class="skill-category-icon">🤖</div>
+                        <h3 class="skill-category-title">AI & Agentic Systems</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">LangChain</span>
+                            <span class="skill-tag">LlamaIndex</span>
+                            <span class="skill-tag">OpenAI API</span>
+                            <span class="skill-tag">Gemini</span>
+                            <span class="skill-tag">RAG</span>
+                            <span class="skill-tag">Vector DBs</span>
+                            <span class="skill-tag">Agents</span>
+                        </div>
+                    </div>
+
+                    <!-- DevOps -->
+                    <div class="skill-category fade-in">
+                        <div class="skill-category-icon">☁️</div>
+                        <h3 class="skill-category-title">DevOps & Cloud</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">GCP</span>
+                            <span class="skill-tag">CI/CD</span>
+                            <span class="skill-tag">GitHub Actions</span>
+                            <span class="skill-tag">Linux</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="skill-category fade-in">
+                        <div class="skill-category-icon">🛠️</div>
+                        <h3 class="skill-category-title">Tools & Workflow</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Postman</span>
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">Jira</span>
+                            <span class="skill-tag">Notion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience section">
+            <div class="container">
+                <div class="section-narrow">
+                    <span class="section-label fade-in">Experience</span>
+                    <h2 class="section-title fade-in">Work <span class="gradient-text">History</span></h2>
+                    <p class="section-subtitle fade-in">My professional journey building impactful solutions.</p>
+
+                    <div class="timeline">
+                        <!-- Experience 1 -->
+                        <div class="timeline-item fade-in">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div>
+                                        <h3 class="timeline-role">Senior Full Stack Developer</h3>
+                                        <p class="timeline-company">TechSolutions Inc.</p>
+                                    </div>
+                                    <span class="timeline-date">2023 - Present</span>
+                                </div>
+                                <p class="timeline-description">
+                                    Leading the development of enterprise-grade web applications and AI-powered
+                                    solutions.
+                                </p>
+                                <ul class="timeline-achievements">
+                                    <li>Architected a microservices-based platform using Laravel and Django, reducing
+                                        API response times by 40%</li>
+                                    <li>Built an Agentic AI system for automated data analysis using LangChain and
+                                        Gemini</li>
+                                    <li>Led a team of 5 developers, implementing agile methodologies</li>
+                                    <li>Designed PostgreSQL schemas with Row Level Security for multi-tenant
+                                        applications</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Experience 2 -->
+                        <div class="timeline-item fade-in">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div>
+                                        <h3 class="timeline-role">Full Stack Developer</h3>
+                                        <p class="timeline-company">Digital Creative Agency</p>
+                                    </div>
+                                    <span class="timeline-date">2021 - 2023</span>
+                                </div>
+                                <p class="timeline-description">
+                                    Developed interactive web experiences and scalable backend systems for diverse
+                                    clients.
+                                </p>
+                                <ul class="timeline-achievements">
+                                    <li>Built 15+ client projects using Vue.js/React frontends with Laravel backends
+                                    </li>
+                                    <li>Implemented real-time features using WebSockets and Redis</li>
+                                    <li>Achieved 95+ Lighthouse scores through performance optimization</li>
+                                    <li>Mentored junior developers on best practices and code review</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Experience 3 -->
+                        <div class="timeline-item fade-in">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div>
+                                        <h3 class="timeline-role">Junior Web Developer</h3>
+                                        <p class="timeline-company">StartupHub</p>
+                                    </div>
+                                    <span class="timeline-date">2019 - 2021</span>
+                                </div>
+                                <p class="timeline-description">
+                                    Started my professional journey building web applications for early-stage startups.
+                                </p>
+                                <ul class="timeline-achievements">
+                                    <li>Developed and maintained PHP/Laravel applications for e-commerce platforms</li>
+                                    <li>Created responsive UIs using Vue.js and Tailwind CSS</li>
+                                    <li>Integrated third-party APIs for payment processing and shipping</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects section">
+            <div class="container">
+                <div class="section-narrow">
+                    <span class="section-label fade-in">Projects</span>
+                    <h2 class="section-title fade-in">Featured <span class="gradient-text">Work</span></h2>
+                    <p class="section-subtitle fade-in">A selection of projects I've built and shipped.</p>
+                </div>
+
+                <div class="projects-grid">
                     <!-- Project 1 -->
-                    <div class="content-card">
-                        <h3 class="card-title">Cloud Janitor (FinOps Agent)</h3>
-                        <div class="card-body">
-                            Autonomous AI agent that detects wasted cloud resources and proposes safe Terraform cleanup
-                            code. Features a human-in-the-loop approval workflow to ensure safety before destruction.
-                            <ul>
-                                <li>AI-Powered Waste Detection using Gemini-based analysis.</li>
-                                <li>Structured JSON reports with savings breakdowns via Kestra.</li>
-                            </ul>
-                        </div>
-                        <div class="card-links">
-                            <a href="#" class="card-link">Live Demo</a>
-                            <a href="#" class="card-link">Source Code</a>
+                    <div class="project-card fade-in">
+                        <div class="project-image">🤖</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Cloud Janitor - FinOps Agent</h3>
+                            <p class="project-description">
+                                Autonomous AI agent that detects wasted cloud resources and proposes safe Terraform
+                                cleanup code with human-in-the-loop approval workflow.
+                            </p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>LangChain</span>
+                                <span>Gemini</span>
+                                <span>Terraform</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link">Live Demo →</a>
+                                <a href="#" class="project-link">Source Code →</a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Project 2 -->
-                    <div class="content-card">
-                        <h3 class="card-title">SensAI Career Coach</h3>
-                        <div class="card-body">
-                            Full-stack AI platform offering resume analysis and career guidance. Built with an
-                            event-driven architecture using Inngest to handle complex AI workflows asynchronously.
-                            <ul>
-                                <li>Generates tailored career documents using LLMs.</li>
-                                <li>Interview Preparation Module with adaptive feedback loops.</li>
-                            </ul>
-                        </div>
-                        <div class="card-links">
-                            <a href="#" class="card-link">Source Code</a>
+                    <div class="project-card fade-in">
+                        <div class="project-image">📄</div>
+                        <div class="project-content">
+                            <h3 class="project-title">RAG Resume Analyzer</h3>
+                            <p class="project-description">
+                                Cost-effective document analysis tool using local embeddings to chat with PDFs,
+                                eliminating API costs while maintaining accuracy.
+                            </p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>LlamaIndex</span>
+                                <span>FastAPI</span>
+                                <span>Vue.js</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link">Source Code →</a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Project 3 -->
-                    <div class="content-card">
-                        <h3 class="card-title">RAG Resume Analyzer</h3>
-                        <div class="card-body">
-                            Cost-effective document analysis tool. Uses local embeddings to chat with PDFs without
-                            hitting API rate limits, with Gemini handling the reasoning.
-                            <ul>
-                                <li>Local Embeddings: Zero API costs for processing documents.</li>
-                                <li>Built on LlamaIndex for robust document indexing.</li>
-                            </ul>
+                    <div class="project-card fade-in">
+                        <div class="project-image">🏥</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Hospital Management System</h3>
+                            <p class="project-description">
+                                Comprehensive HMS with patient records, lab management, billing, and reporting.
+                                Multi-tenant architecture supporting 10+ clinics.
+                            </p>
+                            <div class="project-tech">
+                                <span>Laravel</span>
+                                <span>Vue.js</span>
+                                <span>PostgreSQL</span>
+                                <span>Redis</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link">Case Study →</a>
+                            </div>
                         </div>
-                        <div class="card-links">
-                            <a href="#" class="card-link">Source Code</a>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-card fade-in">
+                        <div class="project-image">🛒</div>
+                        <div class="project-content">
+                            <h3 class="project-title">E-Commerce Distribution Platform</h3>
+                            <p class="project-description">
+                                B2B distribution platform with inventory management, order processing, and real-time
+                                delivery tracking using GPS integration.
+                            </p>
+                            <div class="project-tech">
+                                <span>Laravel</span>
+                                <span>React</span>
+                                <span>Flutter</span>
+                                <span>MySQL</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link">Live Demo →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="project-card fade-in">
+                        <div class="project-image">💼</div>
+                        <div class="project-content">
+                            <h3 class="project-title">SensAI Career Coach</h3>
+                            <p class="project-description">
+                                AI-powered career platform with resume analysis, interview preparation, and
+                                personalized career guidance using LLMs.
+                            </p>
+                            <div class="project-tech">
+                                <span>Django</span>
+                                <span>React</span>
+                                <span>OpenAI</span>
+                                <span>Inngest</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link">Source Code →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="project-card fade-in">
+                        <div class="project-image">📊</div>
+                        <div class="project-content">
+                            <h3 class="project-title">Analytics Dashboard</h3>
+                            <p class="project-description">
+                                Real-time analytics dashboard for tracking business metrics with customizable widgets
+                                and automated reporting.
+                            </p>
+                            <div class="project-tech">
+                                <span>Vue.js</span>
+                                <span>Laravel</span>
+                                <span>Chart.js</span>
+                                <span>WebSocket</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link">Live Demo →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Garage Section -->
-            <section id="garage" class="content-section fade-in-section">
-                <h2 class="section-title">The Garage 🔧</h2>
-                <div class="text-content">
-                    <p>My digital garden of experiments, active projects, and learning roadmap.</p>
+        <!-- Garage Section -->
+        <section id="garage" class="garage section">
+            <div class="container">
+                <div class="section-narrow">
+                    <span class="section-label fade-in">The Garage 🔧</span>
+                    <h2 class="section-title fade-in">Currently <span class="gradient-text">Exploring</span></h2>
+                    <p class="section-subtitle fade-in">My digital workshop of experiments and learning paths.</p>
                 </div>
 
-                <h3 class="card-title">Currently I'm learning!</h3>
-                <div class="card-list">
-                    <div class="content-card">
-                        <h3 class="card-title">Autonomous Agents & RAG</h3>
-                        <p class="card-body">Exploring LLM orchestration, vector databases, and agentic workflows.</p>
-                    </div>
-                    <div class="content-card">
-                        <h3 class="card-title">Full Stack Engineering</h3>
-                        <p class="card-body">Building scalable web applications with modern frameworks, serverless
-                            architecture, and robust databases.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Blog Section -->
-            <section id="blog" class="content-section fade-in-section">
-                <h2 class="section-title">Blog</h2>
-                <div class="card-list">
-                    <div class="content-card">
-                        <div class="card-header">
-                            <h3 class="card-title"><a href="#" class="card-link">Building InfiJobs: My First
-                                    Project</a></h3>
-                            <span class="card-meta">Jan 01, 2026</span>
-                        </div>
-                        <p class="card-body">
-                            Lessons from my first real project—how I handled AI-based code evaluation, database
-                            security, and performance as a junior developer.
+                <div class="garage-grid">
+                    <div class="garage-card fade-in">
+                        <div class="garage-icon">🧠</div>
+                        <h3 class="garage-title">Agentic AI & RAG Systems</h3>
+                        <p class="garage-text">
+                            Deep diving into multi-agent architectures, function calling, and building autonomous
+                            systems that can reason and act on complex tasks.
                         </p>
-                        <div class="project-tags">
-                            <span>React</span>
-                            <span>Supabase</span>
-                            <span>Serverless</span>
-                        </div>
+                    </div>
+
+                    <div class="garage-card fade-in">
+                        <div class="garage-icon">⚡</div>
+                        <h3 class="garage-title">Event-Driven Architecture</h3>
+                        <p class="garage-text">
+                            Exploring message queues, event sourcing, and CQRS patterns for building highly scalable
+                            and resilient distributed systems.
+                        </p>
+                    </div>
+
+                    <div class="garage-card fade-in">
+                        <div class="garage-icon">🔐</div>
+                        <h3 class="garage-title">Security & Authentication</h3>
+                        <p class="garage-text">
+                            Implementing OAuth 2.0, JWT best practices, and exploring zero-trust security models for
+                            modern web applications.
+                        </p>
+                    </div>
+
+                    <div class="garage-card fade-in">
+                        <div class="garage-icon">📱</div>
+                        <h3 class="garage-title">Cross-Platform Development</h3>
+                        <p class="garage-text">
+                            Building mobile experiences with Flutter and React Native, integrating with existing web
+                            backends seamlessly.
+                        </p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Contact Section -->
-            <section id="contact" class="content-section fade-in-section">
-                <h2 class="section-title">Contact</h2>
-                <p class="text-content">Have a project in mind? I'd love to hear about it. Let's create something
-                    exceptional together.</p>
-                <div class="card-list" style="margin-top: 1rem;">
-                    <div class="content-card">
-                        <div class="card-body">
-                            <ul class="contact-list">
-                                <li><a href="mailto:tanveer.raza@example.com"
-                                        class="card-link">tanveer.raza@example.com</a></li>
-                                <li><a href="#" class="card-link">LinkedIn</a></li>
-                                <li><a href="#" class="card-link">GitHub</a></li>
-                                <li><a href="#" class="card-link">Twitter</a></li>
-                            </ul>
+        <!-- Blog Section -->
+        <section id="blog" class="blog section">
+            <div class="container">
+                <div class="section-narrow">
+                    <span class="section-label fade-in">Blog</span>
+                    <h2 class="section-title fade-in">Latest <span class="gradient-text">Articles</span></h2>
+                    <p class="section-subtitle fade-in">Thoughts and learnings from my development journey.</p>
+                </div>
+
+                <div class="blog-grid">
+                    <article class="blog-card fade-in">
+                        <span class="blog-date">January 5, 2026</span>
+                        <h3 class="blog-title">
+                            <a href="#">Building Agentic AI Systems with LangChain and Laravel</a>
+                        </h3>
+                        <p class="blog-excerpt">
+                            A deep dive into integrating AI agents with PHP Laravel backends, handling function calls,
+                            and creating robust workflows.
+                        </p>
+                        <div class="blog-tags">
+                            <span>AI</span>
+                            <span>Laravel</span>
+                            <span>LangChain</span>
                         </div>
+                    </article>
+
+                    <article class="blog-card fade-in">
+                        <span class="blog-date">December 28, 2025</span>
+                        <h3 class="blog-title">
+                            <a href="#">RAG vs Fine-Tuning: When to Use What</a>
+                        </h3>
+                        <p class="blog-excerpt">
+                            Comparing retrieval-augmented generation with fine-tuning approaches for customizing LLMs
+                            to domain-specific tasks.
+                        </p>
+                        <div class="blog-tags">
+                            <span>AI</span>
+                            <span>RAG</span>
+                            <span>LLMs</span>
+                        </div>
+                    </article>
+
+                    <article class="blog-card fade-in">
+                        <span class="blog-date">December 15, 2025</span>
+                        <h3 class="blog-title">
+                            <a href="#">Multi-Tenant Architecture in Laravel: A Complete Guide</a>
+                        </h3>
+                        <p class="blog-excerpt">
+                            Implementing secure multi-tenant SaaS applications with database separation, RLS, and
+                            subdomain routing.
+                        </p>
+                        <div class="blog-tags">
+                            <span>Laravel</span>
+                            <span>SaaS</span>
+                            <span>Architecture</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+            <div class="container">
+                <div class="contact-content fade-in">
+                    <span class="section-label">Get In Touch</span>
+                    <h2 class="section-title">Let's Build Something <span class="gradient-text">Amazing</span></h2>
+                    <p class="contact-text">
+                        Have a project in mind or want to discuss opportunities?
+                        I'm always open to interesting conversations and collaborations.
+                    </p>
+
+                    <a href="mailto:tanveer.raza@example.com" class="contact-email">tanveer.raza@example.com</a>
+
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Footer -->
-            <footer class="site-footer fade-in-section">
-                <div class="footer-links">
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-text">© 2026 Tanveer Raza. Built with passion.</p>
+                <nav class="footer-links">
                     <a href="#home">Home</a>
-                    <a href="#experience">Experience</a>
+                    <a href="#about">About</a>
                     <a href="#projects">Projects</a>
-                    <a href="#garage">Garage</a>
                     <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-copy">
-                    &copy; 2026 Tanveer Raza. All rights reserved.
-                </div>
-            </footer>
+                </nav>
+            </div>
+        </div>
+    </footer>
 
-        </main>
-    </div>
+    <!-- Scripts -->
+    <script src="script.js"></script>
 
 </body>
 
